@@ -1,0 +1,111 @@
+/* Fondo general */
+body{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    background: radial-gradient(circle at 10% 20%, #0f172a 0%, #05030a 20%),
+                radial-gradient(circle at 90% 80%, rgba(120,40,200,0.12) 0%, transparent 30%);
+    height:100vh;
+    overflow:hidden;
+    font-family: sans-serif;
+    color:white;
+    text-align:center;
+}
+
+/* Vibras animadas */
+.vibes{
+    position:fixed;
+    inset:-20%;
+    background:
+        radial-gradient(circle at 30% 30%, rgba(63,94,251,0.08), transparent 20%),
+        radial-gradient(circle at 70% 70%, rgba(255,0,150,0.06), transparent 20%);
+    filter: blur(30px) saturate(1.4);
+    animation: drift 12s linear infinite;
+    z-index:0;
+}
+@keyframes drift{
+    0%{transform:translate3d(-2%, -2%, 0) scale(1)}
+    50%{transform:translate3d(2%, 2%, 0) scale(1.03)}
+    100%{transform:translate3d(-2%, -2%, 0) scale(1)}
+}
+
+/* Humo */
+.smoke{
+    position:fixed;
+    inset:-10%;
+    pointer-events:none;
+    z-index:0;
+    mix-blend-mode:screen;
+    opacity:0.55;
+}
+.smoke::before, .smoke::after{
+    content:"";
+    position:absolute;
+    width:140%;
+    height:120%;
+    left:-20%;
+    top:-10%;
+    background:
+        radial-gradient(40% 30% at 10% 30%, rgba(100,180,255,0.12) 0%, transparent 15%),
+        radial-gradient(50% 40% at 80% 70%, rgba(255,100,200,0.12) 0%, transparent 18%);
+    filter: blur(48px) contrast(1.05);
+    animation: swirl 18s linear infinite;
+}
+.smoke::after{
+    transform:scaleX(-1);
+    animation-duration:22s;
+    opacity:0.85;
+}
+@keyframes swirl{
+    0%{transform:translateY(0) rotate(0deg)}
+    50%{transform:translateY(-6%) rotate(6deg)}
+    100%{transform:translateY(0) rotate(0deg)}
+}
+
+/* Botón fumado */
+a button{
+    padding: 18px 44px;
+    font-size:1.25rem;
+    font-weight:800;
+    letter-spacing:1px;
+    border-radius:999px;
+    border: 2px solid rgba(255,255,255,0.06);
+    color: white;
+    background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(0,0,0,0.06));
+    cursor:pointer;
+    position:relative;
+    overflow:hidden;
+    transition: transform .18s cubic-bezier(.2,.9,.3,1), box-shadow .18s;
+    z-index:2;
+}
+
+a button::before{
+    content:"";
+    position:absolute;
+    inset:-6px;
+    z-index:-1;
+    filter: blur(18px);
+    opacity:0.9;
+    background: linear-gradient(90deg, rgba(63,94,251,0.95), rgba(255,0,150,0.95));
+    mix-blend-mode:screen;
+    animation: neonPulse 2.8s ease-in-out infinite;
+}
+
+@keyframes neonPulse{
+    0%,100%{opacity:0.9; transform:scale(1)}
+    50%{opacity:0.6; transform:scale(1.05)}
+}
+
+a button:hover{
+    transform:scale(1.05);
+    box-shadow: 0 0 20px rgba(255,0,150,0.6), 0 0 40px rgba(63,94,251,0.6);
+}
+
+/* Texto */
+p{
+    font-size:1.5rem;
+    margin-bottom:2rem;
+    z-index:2;
+    text-shadow: 0 0 10px rgba(255,255,255,0.3);
+}
